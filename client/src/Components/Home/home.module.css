@@ -1,0 +1,41 @@
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+
+  width: 100%;
+  height: 100vh;
+  background-color: rgba(135, 149, 149, 0.334);
+}
+
+.dogsContainer {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+
+  width: 80vw;
+  height: 80vh;
+  margin: 20px;
+
+  flex-wrap: wrap;
+}
+
+.dogBox {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  flex-direction: column;
+
+  width: 200px;
+  height: 400px;
+  margin: 20px;
+
+  background-color: burlywood;
+  border-radius: 20px;
+}
+
+.dogBox > img {
+  max-width: 200px;
+  max-height: 200px;
+}
