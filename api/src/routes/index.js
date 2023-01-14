@@ -1,5 +1,7 @@
 const { default: axios } = require('axios');
 const { Router } = require('express');
+
+const { Temperament } = require('../db');
 // Importar todos los routers;
 // Ejemplo: const authRouter = require('./auth.js');
 
@@ -40,7 +42,15 @@ router.get('/dogs/:id', async (req, res) => {
         const dogs = await axios.get(`https://api.thedogapi.com/v1/breeds`);
 
         let result = dogs.data.filter(dog => dog.id == id).map(dog => {
-            return { id: dog.id, name: dog.name, weight: dog.weight, life_span: dog.life_span, temperament: dog.temperament, image: dog.image.url, height: dog.height }
+            return {
+                id: dog.id,
+                name: dog.name,
+                weight: dog.weight,
+                life_span: dog.life_span,
+                temperament: dog.temperament,
+                image: dog.image.url,
+                height: dog.height
+            }
         })
 
 
@@ -52,5 +62,36 @@ router.get('/dogs/:id', async (req, res) => {
 
     res.end();
 })
+
+router.post('/dogs', (req, res) => {
+
+    const { name, height, weight, life_span, temperaments } = req.body;
+
+
+})
+
+router.get('/temperaments', async (req, res) => {
+    try {
+        let temperamentsDB = await Temperament.findAll();
+        let msg = 'Data from DB'
+
+        if (!temperamentsDB.length) {
+            const dogs = await axios.get(`https://api.thedogapi.com/v1/breeds`);
+            const temperaments = [...new Set(
+                dogs.data.flatMap(dog => dog.temperament?.split(', ')))]
+                .map(temperament => ({ name: temperament }));
+
+            await Temperament.bulkCreate(temperaments)
+            temperamentsDB = temperaments;
+
+            msg = 'Data from API'
+        }
+
+        res.status(200).send({ msg, data: temperamentsDB });
+    } catch (error) {
+        res.status(400).send({ error: error.message });
+    }
+});
+
 
 module.exports = router;
