@@ -78,7 +78,7 @@ router.get('/temperaments', async (req, res) => {
         if (!temperamentsDB.length) {
             const dogs = await axios.get(`https://api.thedogapi.com/v1/breeds`);
             const temperaments = [...new Set(
-                dogs.data.flatMap(dog => dog.temperament?.split(', ')))]
+                dogs.data.flatMap(dog => dog.temperament?.split(', ')))].filter(temperament => temperament)
                 .map(temperament => ({ name: temperament }));
 
             await Temperament.bulkCreate(temperaments)
