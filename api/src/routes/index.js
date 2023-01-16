@@ -23,7 +23,7 @@ router.get('/dogs', async (req, res) => {
         }
 
         const mapDogs = dogs.data.map(dog => {
-            return { id: dog.id, name: dog.name, weight: dog.weight, temperament: dog.temperament, image: dog.image.url }
+            return { id: dog.id, name: dog.name, weight: dog.weight.metric, temperament: dog.temperament?.split(', '), image: dog.image.url }
         })
 
 
@@ -45,9 +45,9 @@ router.get('/dogs/:id', async (req, res) => {
             return {
                 id: dog.id,
                 name: dog.name,
-                weight: dog.weight,
+                weight: dog.weight.metric,
                 life_span: dog.life_span,
-                temperament: dog.temperament,
+                temperament: dog.temperament?.split(', '),
                 image: dog.image.url,
                 height: dog.height
             }
@@ -78,7 +78,7 @@ router.get('/temperaments', async (req, res) => {
         if (!temperamentsDB.length) {
             const dogs = await axios.get(`https://api.thedogapi.com/v1/breeds`);
             const temperaments = [...new Set(
-                dogs.data.flatMap(dog => dog.temperament?.split(', ')))]
+                dogs.data.filter(dog => dog.temperament).flatMap((dog) => dog.temperament.split(', ')))]
                 .map(temperament => ({ name: temperament }));
 
             await Temperament.bulkCreate(temperaments)
