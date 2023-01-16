@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getBreeds } from "../../Redux/Actions/actions";
 import { useEffect } from "react";
 import { useState } from "react";
+import Navbar from "./navbar/Navbar";
 
 // pag = 8
 
@@ -13,11 +14,16 @@ const PAGINATE = 8;
 export default function Home() {
   const dispatch = useDispatch();
   const breeds = useSelector((state) => state.allBreeds);
+  const errors = useSelector((state) => state.errors);
 
   const [currentBreeds, setCurrentBreeds] = useState([]);
   const [currentPageNumber, setCurrentPageNumber] = useState(1);
 
   const MAX_PAGES = Math.round(breeds.length / 8);
+
+  useEffect(() => {
+    errors && alert(errors);
+  }, [errors]);
 
   // get inicial data
   useEffect(() => {
@@ -55,6 +61,8 @@ export default function Home() {
 
   return (
     <div className={style.container}>
+      <Navbar />
+
       <button onClick={previous}>Previous</button>
       <div>{currentPageNumber}</div>
       <button onClick={nextPage}>NEXT</button>
