@@ -23,7 +23,7 @@ router.get('/dogs', async (req, res) => {
         }
 
         const mapDogs = dogs.data.map(dog => {
-            return { id: dog.id, name: dog.name, weight: dog.weight.metric, temperament: dog.temperament, image: dog.image.url }
+            return { id: dog.id, name: dog.name, weight: dog.weight.metric, temperament: dog.temperament?.split(', '), image: dog.image.url }
         })
 
 
@@ -47,7 +47,7 @@ router.get('/dogs/:id', async (req, res) => {
                 name: dog.name,
                 weight: dog.weight.metric,
                 life_span: dog.life_span,
-                temperament: dog.temperament,
+                temperament: dog.temperament?.split(', '),
                 image: dog.image.url,
                 height: dog.height
             }
