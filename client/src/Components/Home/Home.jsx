@@ -74,7 +74,7 @@ export default function Home() {
               <h3>{breed.name}</h3>
               <img src={breed.image} alt="" />
               <p>{breed.weight}KG</p>
-              <p>{breed.temperament}</p>
+              <p>{breed.temperament.join(", ")}</p>
             </div>
           );
         })}
