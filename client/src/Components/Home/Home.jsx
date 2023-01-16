@@ -22,7 +22,7 @@ export default function Home() {
             <div key={i} className={style.dogBox}>
               <h3>{breed.name}</h3>
               <img src={breed.image} alt="" />
-              <p>{breed.weight.metric}CM</p>
+              <p>{breed.weight.metric}KG</p>
               <p>{breed.temperament}</p>
             </div>
           );
