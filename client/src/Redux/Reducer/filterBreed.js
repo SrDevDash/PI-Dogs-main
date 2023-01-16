@@ -20,6 +20,17 @@ export const filter = (filter, breedss) => {
             })
         }
     }
+    if (alpha) {
+        if (alpha === 'ASC') {
+            newBreeds.sort((breedA, breedB) => {
+                return breedA.name < breedB.name
+            })
+        } else {
+            newBreeds.sort((breedA, breedB) => {
+                return breedA.name > breedB.name
+            })
+        }
+    }
 
     return newBreeds
 }

@@ -15,6 +15,7 @@ export default function Home() {
   const dispatch = useDispatch();
   const breeds = useSelector((state) => state.allBreeds);
   const errors = useSelector((state) => state.errors);
+  const filterBreeds = useSelector((state) => state.filterBreeds);
 
   const [currentBreeds, setCurrentBreeds] = useState([]);
   const [currentPageNumber, setCurrentPageNumber] = useState(1);
@@ -24,6 +25,10 @@ export default function Home() {
   useEffect(() => {
     errors && alert(errors);
   }, [errors]);
+
+  useEffect(() => {
+    filterBreeds.length && setCurrentBreeds(filterBreeds);
+  }, [filterBreeds]);
 
   // get inicial data
   useEffect(() => {
@@ -74,7 +79,7 @@ export default function Home() {
               <h3>{breed.name}</h3>
               <img src={breed.image} alt="" />
               <p>{breed.weight}KG</p>
-              <p>{breed.temperament.join(", ")}</p>
+              <p>{breed.temperament?.join(", ")}</p>
             </div>
           );
         })}
