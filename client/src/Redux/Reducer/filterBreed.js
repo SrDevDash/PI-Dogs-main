@@ -6,7 +6,7 @@ export const filter = (filter, breedss) => {
     console.log(temperament, breeds, weigth, alpha);
 
     if (temperament) {
-        newBreeds = breedss.filter(breed => breed.temperament.includes(temperament))
+        newBreeds = breedss.filter(breed => breed.temperament?.includes(temperament))
     }
 
     if (weigth) {
@@ -20,17 +20,20 @@ export const filter = (filter, breedss) => {
             })
         }
     }
+
     if (alpha) {
+        console.log('ordern ALPHA')
         if (alpha === 'ASC') {
             newBreeds.sort((breedA, breedB) => {
-                return breedA.name < breedB.name
+                return breedB.name.charCodeAt(0) - breedA.name.charCodeAt(0)
             })
         } else {
             newBreeds.sort((breedA, breedB) => {
-                return breedA.name > breedB.name
+                return breedA.name.charCodeAt(0) - breedB.name.charCodeAt(0)
             })
         }
     }
+
 
     return newBreeds
 }
