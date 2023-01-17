@@ -29,7 +29,7 @@ const rootReducer = (state = initialState, action) => {
             }
 
         case FILTER_BREEDS:
-            const result = filter(action.payload, state.allBreeds);
+            const result = filter(action.payload, [...state.allBreeds]);
 
             return {
                 ...state,
