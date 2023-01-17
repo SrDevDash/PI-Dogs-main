@@ -15,6 +15,7 @@ export default function Home() {
   const dispatch = useDispatch();
   const breeds = useSelector((state) => state.allBreeds);
   const errors = useSelector((state) => state.errors);
+
   const filterBreeds = useSelector((state) => state.filterBreeds);
 
   const [currentBreeds, setCurrentBreeds] = useState([]);
