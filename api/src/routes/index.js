@@ -49,7 +49,7 @@ router.get('/dogs/:id', async (req, res) => {
                 life_span: dog.life_span,
                 temperament: dog.temperament?.split(', '),
                 image: dog.image.url,
-                height: dog.height
+                height: dog.height.metric
             }
         })
 

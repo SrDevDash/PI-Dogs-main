@@ -6,6 +6,7 @@ import { getBreeds } from "../../Redux/Actions/actions";
 import { useEffect } from "react";
 import { useState } from "react";
 import Navbar from "./navbar/Navbar";
+import { useNavigate } from "react-router-dom";
 
 // pag = 8
 
@@ -20,7 +21,9 @@ export default function Home() {
   const [currentBreeds, setCurrentBreeds] = useState([]);
   const [currentPageNumber, setCurrentPageNumber] = useState(1);
 
-  const MAX_PAGES = Math.round(breeds.length / 8);
+  const navigate = useNavigate();
+
+  const MAX_PAGES = Math.round(filterBreeds.length / 8);
 
   useEffect(() => {
     errors && alert(errors);
@@ -45,12 +48,12 @@ export default function Home() {
     const minRange = maxRange - PAGINATE;
 
     setCurrentBreeds(
-      breeds.slice(
+      filterBreeds.slice(
         minRange,
-        maxRange >= breeds.length ? breeds.length : maxRange
+        maxRange >= filterBreeds.length ? filterBreeds.length : maxRange
       )
     );
-  }, [currentPageNumber, breeds]);
+  }, [currentPageNumber, filterBreeds]);
 
   const nextPage = (e) => {
     if (!(MAX_PAGES < currentPageNumber + 1)) {
@@ -75,7 +78,11 @@ export default function Home() {
       <div className={style.dogsContainer}>
         {currentBreeds.map((breed, i) => {
           return (
-            <div key={i} className={style.dogBox}>
+            <div
+              key={i}
+              className={style.dogBox}
+              onClick={() => navigate(`/breed/${breed.id}`)}
+            >
               <h3>{breed.name}</h3>
               <img src={breed.image} alt="" />
               <p>{breed.weight}KG</p>

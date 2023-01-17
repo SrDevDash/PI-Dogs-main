@@ -40,6 +40,7 @@ export default function Navbar() {
   return (
     <div>
       <select name="temperament" onChange={handleFilter}>
+        <option value="">Temperament</option>
         {temperaments.map((temperament, i) => {
           return (
             <option key={i} value={temperament.name}>
@@ -49,18 +50,21 @@ export default function Navbar() {
         })}
       </select>
       <select onChange={handleFilter} name="breeds">
+        <option value="">Breeds</option>
         <option value="Real Breeds">Real Breeds</option>
         <option value="Custom Breeds">Custom Breeds</option>
       </select>
 
       <select onChange={handleFilter} name="weigth">
+        <option value="">Weigth</option>
         <option value="Weigth ASC">ASC</option>
         <option value="Weigth DESC">DESC</option>
       </select>
 
       <select onChange={handleFilter} name="alpha">
-        <option value="ASC">ASC</option>
-        <option value="DESC">DESC</option>
+        <option value="">ORDER</option>
+        <option value="DESC">A-Z</option>
+        <option value="ASC">Z-A</option>
       </select>
 
       <button onClick={submitFilter}>Filter</button>

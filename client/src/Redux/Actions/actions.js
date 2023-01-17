@@ -1,4 +1,4 @@
-import { GET_BREEDS, ERROR, GET_BREEDS_BY_NAME, GET_TEMPERAMENTS, FILTER_BREEDS } from "./types"
+import { DETAILS_BREED, GET_BREEDS, ERROR, GET_BREEDS_BY_NAME, GET_TEMPERAMENTS, FILTER_BREEDS } from "./types"
 import axios from 'axios'
 
 const HOST = "localhost";
@@ -43,5 +43,18 @@ export const getTemperament = () => {
 export const filterBreeds = (filter) => {
     return function (dispatch) {
         return dispatch({ type: FILTER_BREEDS, payload: filter })
+    }
+}
+
+export const detailBreed = (id) => {
+    console.log('try')
+    return async function (dispatch) {
+        try {
+            let breed = await axios(`http://localhost:3001/dogs/${id}`);
+
+            return dispatch({ type: DETAILS_BREED, payload: breed.data })
+        } catch (error) {
+            return dispatch({ type: ERROR, payload: error.message })
+        }
     }
 }
