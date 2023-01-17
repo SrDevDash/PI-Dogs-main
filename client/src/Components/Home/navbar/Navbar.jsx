@@ -63,8 +63,8 @@ export default function Navbar() {
 
       <select onChange={handleFilter} name="alpha">
         <option value="">ORDER</option>
-        <option value="ASC">Z-A</option>
         <option value="DESC">A-Z</option>
+        <option value="ASC">Z-A</option>
       </select>
 
       <button onClick={submitFilter}>Filter</button>
