@@ -1,10 +1,11 @@
-import { GET_BREEDS, GET_BREEDS_BY_NAME, ERROR, GET_TEMPERAMENTS, FILTER_BREEDS } from "../Actions/types";
+import { GET_BREEDS, GET_BREEDS_BY_NAME, ERROR, GET_TEMPERAMENTS, FILTER_BREEDS, DETAILS_BREED } from "../Actions/types";
 import { filter } from "./filterBreed";
 
 const initialState = {
     allBreeds: [],
     temperaments: [],
     filterBreeds: [],
+    detailsBreed: null,
     errors: ''
 };
 
@@ -36,8 +37,15 @@ const rootReducer = (state = initialState, action) => {
                 filterBreeds: result
             }
 
+
+        case DETAILS_BREED:
+            console.log(action.payload)
+            return {
+                ...state,
+                detailsBreed: action.payload
+            }
+
         case ERROR:
-            console.log(action.payload);
             return {
                 ...state,
                 errors: action.payload
