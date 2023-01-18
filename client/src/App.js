@@ -3,6 +3,7 @@ import './App.css';
 import LandingPage from './Components/LandingPage/LandingPage';
 import Home from './Components/Home/Home'
 import Details from './Components/Details/Details';
+import CreateBreedForm from './Components/CreateBreedForm/CreateBreedForm';
 
 function App() {
   return (
@@ -12,6 +13,8 @@ function App() {
         <Route exact path="/" element={<LandingPage />} />
 
         <Route exact path="/home" element={<Home />} />
+
+        <Route exact path="/breed/create" element={<CreateBreedForm />} />
 
         <Route exact path="/breed/:id" element={<Details />} />
 
