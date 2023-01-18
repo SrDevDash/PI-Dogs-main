@@ -1,7 +1,7 @@
 const { default: axios } = require('axios');
 const { Router } = require('express');
 
-const { Temperament } = require('../db');
+const { Temperament, Breed } = require('../db');
 // Importar todos los routers;
 // Ejemplo: const authRouter = require('./auth.js');
 
@@ -13,16 +13,18 @@ const router = Router();
 
 router.get('/dogs', async (req, res) => {
     try {
+        const breedDB = await Breed.findAll();
         let dogs = await axios.get(`https://api.thedogapi.com/v1/breeds`);
 
         const { name } = req.query;
 
+        dogs = [...dogs.data, ...breedDB];
 
         if (name) {
-            dogs.data = dogs.data.filter(dog => dog.name.includes(name))
+            dogs = dogs.filter(dog => dog.name.includes(name))
         }
 
-        const mapDogs = dogs.data.map(dog => {
+        const mapDogs = dogs.map(dog => {
             return { id: dog.id, name: dog.name, weight: dog.weight.metric, temperament: dog.temperament?.split(', '), image: dog.image.url }
         })
 
@@ -35,13 +37,17 @@ router.get('/dogs', async (req, res) => {
     res.end();
 })
 
-router.get('/dogs/:id', async (req, res) => {
+router.get('/breeds/:id', async (req, res) => {
     const { id } = req.params
 
     try {
-        const dogs = await axios.get(`https://api.thedogapi.com/v1/breeds`);
+        const breedsAPI = await axios.get(`https://api.thedogapi.com/v1/breeds`);
+        const breedDB = await Breed.findAll();
 
-        let result = dogs.data.filter(dog => dog.id == id).map(dog => {
+        const breeds = [...breedsAPI.data, ...breedDB]
+
+
+        let result = breeds.filter(dog => dog.id == id).map(dog => {
             return {
                 id: dog.id,
                 name: dog.name,
@@ -63,11 +69,20 @@ router.get('/dogs/:id', async (req, res) => {
     res.end();
 })
 
-router.post('/dogs', (req, res) => {
+router.post('/breed', async (req, res) => {
 
-    const { name, height, weight, life_span, temperaments } = req.body;
+    const { name, height, weight, life_span, image, temperaments } = req.body;
 
+    const result = await Breed.create({ name, height, weight, life_span, image });
+    const temperamentToAdd = await Temperament.findAll({
+        where: { name: temperaments }
+    })
 
+    await result.addTemperaments(temperamentToAdd);
+
+    const tempMap = temperamentToAdd.map(temp => temp.name)
+
+    res.status(200).send({ ...result.dataValues, temperament: tempMap });
 })
 
 router.get('/temperaments', async (req, res) => {
