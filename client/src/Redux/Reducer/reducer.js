@@ -1,4 +1,4 @@
-import { GET_BREEDS, GET_BREEDS_BY_NAME, ERROR, GET_TEMPERAMENTS, FILTER_BREEDS, DETAILS_BREED } from "../Actions/types";
+import { GET_BREEDS, GET_BREEDS_BY_NAME, ERROR, GET_TEMPERAMENTS, FILTER_BREEDS, DETAILS_BREED, CREATE_BREED } from "../Actions/types";
 import { filter } from "./filterBreed";
 
 const initialState = {
@@ -49,6 +49,12 @@ const rootReducer = (state = initialState, action) => {
             return {
                 ...state,
                 errors: action.payload
+            }
+
+        case CREATE_BREED:
+            return {
+                ...state,
+                allBreeds: [...state.allBreeds, action.payload]
             }
 
         default:
