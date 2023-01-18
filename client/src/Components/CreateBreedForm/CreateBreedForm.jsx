@@ -1,12 +1,17 @@
 import React, { useState } from "react";
+import "./createBreedForm.module.css";
 
 export default function CreateBreedForm() {
   // Crear estado para guardar toda la información del formulario
   const [formData, setFormData] = useState({
     name: "",
-    weight: "",
-    height: "",
-    lifeSpan: "",
+    minWeight: "",
+    minHeight: "",
+    maxWeight: "",
+    maxHeight: "",
+    minLifeSpan: "",
+    maxLifeSpan: "",
+
     temperament: [],
   });
 
@@ -14,6 +19,7 @@ export default function CreateBreedForm() {
   // Manejador de eventos para actualizar el estado cuando el usuario ingresa información
   const handleChange = (event) => {
     const { name, value, options } = event.target;
+    console.log(value);
     if (name === "temperament") {
       setFormData({
         ...formData,
@@ -29,8 +35,20 @@ export default function CreateBreedForm() {
   // Manejador de eventos para enviar la información del formulario al servidor
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log(formData);
-    // Enviar la información al servidor o realizar otra acción
+    // add valitatons
+
+    // Enviar la información al servidor
+    const { name, temperament } = formData;
+
+    const mapData = {
+      name,
+      temperament,
+      weight: `${formData.minWeight} - ${formData.maxWeight}`,
+      height: `${formData.minHeight} - ${formData.maxHeight}`,
+      lifeSpan: `${formData.minLifeSpan} - ${formData.maxLifeSpan}`,
+    };
+
+    console.log(mapData);
   };
 
   return (
@@ -51,8 +69,16 @@ export default function CreateBreedForm() {
           <label>Weight: </label>
           <input
             type="text"
-            name="weight"
-            value={formData.weight}
+            name="minWeight"
+            placeholder="MIN WEIGHT"
+            value={formData.minWeight}
+            onChange={handleChange}
+          />
+          <input
+            type="text"
+            name="maxWeight"
+            placeholder="MAX WEIGHT"
+            value={formData.maxWeight}
             onChange={handleChange}
           />
         </p>
@@ -60,27 +86,39 @@ export default function CreateBreedForm() {
           <label>Height: </label>
           <input
             type="text"
-            name="height"
-            value={formData.height}
+            name="minHeight"
+            placeholder="MIN HEIGHT"
+            value={formData.minheight}
+            onChange={handleChange}
+          />
+          <input
+            type="text"
+            name="maxHeight"
+            placeholder="MAX HEIGHT"
+            value={formData.maxheight}
             onChange={handleChange}
           />
         </p>
         <p>
           <label>Life Span: </label>
           <input
-            type="text"
-            name="life_span"
-            value={formData.lifeSpan}
+            type="number"
+            name="minLifeSpan"
+            placeholder="MIN LIFE SPAN"
+            value={formData.minLifeSpan}
+            onChange={handleChange}
+          />
+          <input
+            type="number"
+            name="maxLifeSpan"
+            placeholder="MAX LIFE SPAN"
+            value={formData.maxLifeSpan}
             onChange={handleChange}
           />
         </p>
         <p>
           <label>Temperament: </label>
-          <select
-            name="temperament"
-            value={formData.temperament}
-            onChange={handleChange}
-          >
+          <select name="temperament" onChange={handleChange}>
             {temperament.map((temperament, index) => (
               <option key={index} value={temperament}>
                 {temperament}
