@@ -2,6 +2,7 @@ const { default: axios } = require('axios');
 const { Router } = require('express');
 
 const { Temperament, Breed } = require('../db');
+const { transform } = require('./lbToKg');
 // Importar todos los routers;
 // Ejemplo: const authRouter = require('./auth.js');
 
@@ -24,11 +25,11 @@ router.get('/dogs', async (req, res) => {
         dogs = [...dogs.data, ...breedDB];
 
         if (name) {
-            dogs = dogs.filter(dog => dog.name.includes(name))
+            dogs = dogs.filter(dog => { return dog.name.toUpperCase().includes(name.toUpperCase()) })
         }
 
         const mapDogs = dogs.map(dog => {
-            return { id: dog.id, name: dog.name, weight: dog.weight.metric, temperament: dog.temperament?.split(', '), image: dog.image.url }
+            return { id: dog.id, name: dog.name, weight: dog.weight.metric !== 'NaN' ? dog.weight.metric : transform(dog.weight.imperial), temperament: dog.temperament?.split(', '), image: dog.image.url }
         })
 
 
