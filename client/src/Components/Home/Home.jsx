@@ -69,7 +69,7 @@ export default function Home() {
 
   return (
     <div className={style.container}>
-      <Navbar />
+      <Navbar navigate={navigate} />
 
       <button onClick={previous}>Previous</button>
       <div>{currentPageNumber}</div>

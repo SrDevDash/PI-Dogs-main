@@ -8,7 +8,7 @@ import {
   filterBreeds,
 } from "../../../Redux/Actions/actions";
 
-export default function Navbar() {
+export default function Navbar({ navigate }) {
   const dispatch = useDispatch();
   const temperaments = useSelector((state) => state.temperaments);
 
@@ -70,6 +70,8 @@ export default function Navbar() {
       <button onClick={submitFilter}>Filter</button>
       <input onChange={onChanceInput} type="text" placeholder="Dog Name" />
       <button onClick={searchHandler}>Search</button>
+
+      <button onClick={() => navigate("/breed/create")}>Create Breed</button>
     </div>
   );
 }
