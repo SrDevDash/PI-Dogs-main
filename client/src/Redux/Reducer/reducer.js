@@ -14,7 +14,8 @@ const rootReducer = (state = initialState, action) => {
         case GET_BREEDS:
             return {
                 ...state,
-                allBreeds: action.payload
+                allBreeds: action.payload,
+                filterBreeds: action.payload
             }
 
         case GET_BREEDS_BY_NAME:
