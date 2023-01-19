@@ -2,7 +2,7 @@ import React from "react";
 import style from "./home.module.css";
 import { useDispatch, useSelector } from "react-redux";
 
-import { getBreeds } from "../../Redux/Actions/actions";
+import { clearBreed, getBreeds } from "../../Redux/Actions/actions";
 import { useEffect } from "react";
 import { useState } from "react";
 import Navbar from "./navbar/Navbar";
@@ -41,6 +41,11 @@ export default function Home() {
       setCurrentBreeds(breeds.slice(0, PAGINATE));
     }
   }, [dispatch, breeds]);
+
+  useEffect(() => {
+    console.log("clear");
+    dispatch(clearBreed());
+  }, []);
 
   // change current info
   useEffect(() => {

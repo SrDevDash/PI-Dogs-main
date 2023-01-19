@@ -13,10 +13,13 @@ const router = Router();
 
 router.get('/dogs', async (req, res) => {
     try {
-        const breedDB = await Breed.findAll();
+        let breedDB = await Breed.findAll();
         let dogs = await axios.get(`https://api.thedogapi.com/v1/breeds`);
 
         const { name } = req.query;
+
+        // this is to know if a breed is from db
+        breedDB = breedDB.map(breed => { return { ...breed, db: true } });
 
         dogs = [...dogs.data, ...breedDB];
 
