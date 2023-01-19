@@ -3,7 +3,6 @@ const transform = (data) => {
 
     const result = `${Math.floor(array[0] * 0.453592)} - ${Math.floor(array[2] * 0.453592)}`;
 
-    console.log(result);
     return result
 }
 
