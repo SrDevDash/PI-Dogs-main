@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import "./createBreedForm.module.css";
 import { createBreed } from "../../Redux/Actions/actions";
+import style from "./createBreedForm.module.css";
 
 export default function CreateBreedForm() {
   // Crear estado para guardar toda la información del formulario
@@ -60,22 +61,21 @@ export default function CreateBreedForm() {
   };
 
   return (
-    <div>
+    <div className={style.container}>
       <button onClick={() => navigate("/home")}>HOME</button>
-      <form onSubmit={handleSubmit}>
-        <div className="card-info">
-          <div>
-            <h2 className="card-title">
-              <label>Name: </label>
-              <input
-                type="text"
-                name="name"
-                value={formData.name}
-                onChange={handleChange}
-              />
-            </h2>
+      <form onSubmit={handleSubmit} className={style.form}>
+        <div className={style.cardinfo}>
+          <div className={style.col}>
+            <label>Name: </label>
+            <input
+              type="text"
+              name="name"
+              placeholder="NAME"
+              value={formData.name}
+              onChange={handleChange}
+            />
           </div>
-          <p>
+          <p className={style.col}>
             <label>Weight: </label>
             <input
               type="text"
@@ -92,7 +92,7 @@ export default function CreateBreedForm() {
               onChange={handleChange}
             />
           </p>
-          <p>
+          <p className={style.col}>
             <label>Height: </label>
             <input
               type="text"
@@ -109,7 +109,7 @@ export default function CreateBreedForm() {
               onChange={handleChange}
             />
           </p>
-          <p>
+          <p className={style.col}>
             <label>Life Span: </label>
             <input
               type="number"
@@ -126,7 +126,7 @@ export default function CreateBreedForm() {
               onChange={handleChange}
             />
           </p>
-          <div>
+          <div className={style.col}>
             <label>Image: </label>
             <input
               type="text"
