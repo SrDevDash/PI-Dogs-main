@@ -53,10 +53,9 @@ export default function CreateBreedForm() {
       image,
       weight: `${formData.minWeight} - ${formData.maxWeight}`,
       height: `${formData.minHeight} - ${formData.maxHeight}`,
-      lifeSpan: `${formData.minLifeSpan} - ${formData.maxLifeSpan}`,
+      life_span: `${formData.minLifeSpan} - ${formData.maxLifeSpan}`,
     };
 
-    console.log(mapData);
     dispatch(createBreed(mapData));
   };
 

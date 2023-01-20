@@ -3,7 +3,10 @@ export const filter = (filter, breedss) => {
 
     let newBreeds = breedss;
 
-    console.log(temperament, breeds, weigth, alpha);
+
+    if (breeds) {
+        newBreeds = breedss.filter(breed => breeds === "Real Breeds" ? !breed.db : breed.db)
+    }
 
     if (temperament) {
         newBreeds = breedss.filter(breed => breed.temperament?.includes(temperament))
@@ -12,11 +15,11 @@ export const filter = (filter, breedss) => {
     if (weigth) {
         if (weigth === 'Weigth ASC') {
             newBreeds.sort((breedA, breedB) => {
-                return breedA.weight.split(' - ')[0] - breedB.weight.split(' - ')[0]
+                return breedA.weight.split(' ')[0] - breedB.weight.split(' ')[0]
             })
         } else {
             newBreeds.sort((breedA, breedB) => {
-                return breedB.weight.split(' - ')[0] - breedA.weight.split(' - ')[0]
+                return breedB.weight.split(' ')[0] - breedA.weight.split(' ')[0]
             })
         }
     }

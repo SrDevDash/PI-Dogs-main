@@ -24,7 +24,7 @@ export const getBreedsByName = (name) => {
             if (!breeds.data?.msg) return dispatch({ type: GET_BREEDS_BY_NAME, payload: breeds.data })
             return dispatch({ type: ERROR, payload: breeds.data.msg })
         } catch (error) {
-            return dispatch({ type: ERROR, payload: error })
+            return dispatch({ type: ERROR, payload: error.message })
         }
     }
 }
