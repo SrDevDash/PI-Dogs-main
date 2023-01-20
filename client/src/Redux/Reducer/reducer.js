@@ -40,7 +40,6 @@ const rootReducer = (state = initialState, action) => {
 
 
         case DETAILS_BREED:
-            console.log(action.payload)
             return {
                 ...state,
                 detailsBreed: action.payload
