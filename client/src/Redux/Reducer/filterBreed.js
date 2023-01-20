@@ -3,7 +3,10 @@ export const filter = (filter, breedss) => {
 
     let newBreeds = breedss;
 
-    console.log(temperament, breeds, weigth, alpha);
+
+    if (breeds) {
+        newBreeds = breedss.filter(breed => breeds === "Real Breeds" ? !breed.db : breed.db)
+    }
 
     if (temperament) {
         newBreeds = breedss.filter(breed => breed.temperament?.includes(temperament))

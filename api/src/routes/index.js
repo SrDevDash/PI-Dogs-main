@@ -22,18 +22,17 @@ router.get('/dogs', async (req, res) => {
         // this is to know if a breed is from db
         breedDB = breedDB.map(breed => { return { ...breed, db: true } });
 
-        dogs = [...dogs.data, ...breedDB];
+        const mapDogs = dogs.data.map(dog => {
+            return { id: dog.id, name: dog.name, weight: dog.weight.metric !== 'NaN' ? dog.weight.metric : transform(dog.weight.imperial), temperament: dog.temperament?.split(', '), image: dog.image.url }
+        })
+
+        dogs = [...mapDogs, ...breedDB];
 
         if (name) {
             dogs = dogs.filter(dog => { return dog.name.toUpperCase().includes(name.toUpperCase()) })
         }
 
-        const mapDogs = dogs.map(dog => {
-            return { id: dog.id, name: dog.name, weight: dog.weight.metric !== 'NaN' ? dog.weight.metric : transform(dog.weight.imperial), temperament: dog.temperament?.split(', '), image: dog.image.url }
-        })
-
-
-        res.status(200).send(mapDogs.length ? mapDogs : { msg: `Dogs not found with that name` });
+        res.status(200).send(dogs.length ? dogs : { msg: `Dogs not found with that name` });
     } catch (error) {
         res.status(400).send(error.message)
     }
