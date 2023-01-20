@@ -8,7 +8,7 @@ import {
   filterBreeds,
 } from "../../../Redux/Actions/actions";
 
-export default function Navbar({ navigate }) {
+export default function Navbar({ navigate, setCurrentPageNumber }) {
   const dispatch = useDispatch();
   const temperaments = useSelector((state) => state.temperaments);
 
@@ -35,6 +35,7 @@ export default function Navbar({ navigate }) {
 
   const submitFilter = (e) => {
     dispatch(filterBreeds(filter));
+    setCurrentPageNumber(1);
   };
 
   return (

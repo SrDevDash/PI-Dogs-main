@@ -45,7 +45,7 @@ export default function Home() {
   useEffect(() => {
     console.log("clear");
     dispatch(clearBreed());
-  }, []);
+  }, [dispatch]);
 
   // change current info
   useEffect(() => {
@@ -74,7 +74,7 @@ export default function Home() {
 
   return (
     <div className={style.container}>
-      <Navbar navigate={navigate} />
+      <Navbar setCurrentPageNumber={setCurrentPageNumber} navigate={navigate} />
 
       <button onClick={previous}>Previous</button>
       <div>{currentPageNumber}</div>
