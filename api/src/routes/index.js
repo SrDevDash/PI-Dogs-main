@@ -14,13 +14,21 @@ const router = Router();
 
 router.get('/dogs', async (req, res) => {
     try {
-        let breedDB = await Breed.findAll();
+        let breedDB = await Breed.findAll({
+            include: {
+                model: Temperament,
+                attributes: ['name'],
+                through: {
+                    BreedTemperament: []
+                }
+            }
+        });
         let dogs = await axios.get(`https://api.thedogapi.com/v1/breeds`);
 
         const { name } = req.query;
 
         // this is to know if a breed is from db
-        breedDB = breedDB.map(breed => { return { ...breed, db: true } });
+        breedDB = breedDB.map(breed => { return { ...breed.dataValues, temperament: breed.dataValues.Temperaments.map(t => t.name), db: true, Temperaments: undefined } });
 
         const mapDogs = dogs.data.map(dog => {
             return { id: dog.id, name: dog.name, weight: dog.weight.metric !== 'NaN' ? dog.weight.metric : transform(dog.weight.imperial), temperament: dog.temperament?.split(', '), image: dog.image.url }
@@ -45,16 +53,23 @@ router.get('/breeds/:id', async (req, res) => {
 
     try {
         const breedsAPI = await axios.get(`https://api.thedogapi.com/v1/breeds`);
-        const breedDB = await Breed.findAll();
+        let breedDB = await Breed.findAll({
+            include: {
+                model: Temperament,
+                attributes: ['name'],
+                through: {
+                    BreedTemperament: []
+                }
+            }
+        });
 
-        const breeds = [...breedsAPI.data, ...breedDB]
+        breedDB = breedDB.map(breed => { return { ...breed.dataValues, temperament: breed.dataValues.Temperaments.map(t => t.name), db: true, Temperaments: undefined } });
 
-
-        let result = breeds.filter(dog => dog.id == id).map(dog => {
+        let result = breedsAPI.data.filter(dog => dog.id == id).map(dog => {
             return {
                 id: dog.id,
                 name: dog.name,
-                weight: dog.weight.metric,
+                weight: dog.weight.metric !== 'NaN' ? dog.weight.metric : transform(dog.weight.imperial),
                 life_span: dog.life_span,
                 temperament: dog.temperament?.split(', '),
                 image: dog.image.url,
@@ -62,8 +77,9 @@ router.get('/breeds/:id', async (req, res) => {
             }
         })
 
+        const breeds = [...result, ...breedDB]
 
-        res.status(200).send(result.length ? result : { msg: 'Dog not found' });
+        res.status(200).send(breeds.length ? breeds : { msg: 'Dog not found' });
 
     } catch (error) {
         res.status(400).send({ error: error.message })
@@ -77,6 +93,7 @@ router.post('/breed', async (req, res) => {
     const { name, height, weight, life_span, image, temperaments } = req.body;
 
     const result = await Breed.create({ name, height, weight, life_span, image });
+
     const temperamentToAdd = await Temperament.findAll({
         where: { name: temperaments }
     })
