@@ -56,7 +56,6 @@ export default function CreateBreedForm() {
       life_span: `${formData.minLifeSpan} - ${formData.maxLifeSpan}`,
     };
 
-    console.log(mapData);
     dispatch(createBreed(mapData));
   };
 

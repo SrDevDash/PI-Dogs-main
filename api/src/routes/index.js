@@ -31,7 +31,8 @@ router.get('/dogs', async (req, res) => {
         breedDB = breedDB.map(breed => { return { ...breed.dataValues, temperament: breed.dataValues.Temperaments.map(t => t.name), db: true, Temperaments: undefined } });
 
         const mapDogs = dogs.data.map(dog => {
-            return { id: dog.id, name: dog.name, weight: dog.weight.metric !== 'NaN' ? dog.weight.metric : transform(dog.weight.imperial), temperament: dog.temperament?.split(', '), image: dog.image.url }
+            if (dog.name === "Olde English Bulldogge") { console.log(transform(dog.weight)) }
+            return { id: dog.id, name: dog.name, weight: transform(dog.weight), temperament: dog.temperament?.split(', '), image: dog.image.url }
         })
 
         dogs = [...mapDogs, ...breedDB];
@@ -69,7 +70,7 @@ router.get('/breeds/:id', async (req, res) => {
             return {
                 id: dog.id,
                 name: dog.name,
-                weight: dog.weight.metric !== 'NaN' ? dog.weight.metric : transform(dog.weight.imperial),
+                weight: transform(dog.weight),
                 life_span: dog.life_span,
                 temperament: dog.temperament?.split(', '),
                 image: dog.image.url,

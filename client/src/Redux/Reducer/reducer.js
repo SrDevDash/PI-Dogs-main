@@ -48,7 +48,8 @@ const rootReducer = (state = initialState, action) => {
         case CREATE_BREED:
             return {
                 ...state,
-                allBreeds: [...state.allBreeds, action.payload]
+                allBreeds: [...state.allBreeds, action.payload],
+                filterBreeds: [...state.allBreeds, action.payload]
             }
 
         case CLEAR_DETAIL_BREED:

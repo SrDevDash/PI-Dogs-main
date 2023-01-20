@@ -15,11 +15,11 @@ export const filter = (filter, breedss) => {
     if (weigth) {
         if (weigth === 'Weigth ASC') {
             newBreeds.sort((breedA, breedB) => {
-                return breedA.weight.split(' - ')[0] - breedB.weight.split(' - ')[0]
+                return breedA.weight.split(' ')[0] - breedB.weight.split(' ')[0]
             })
         } else {
             newBreeds.sort((breedA, breedB) => {
-                return breedB.weight.split(' - ')[0] - breedA.weight.split(' - ')[0]
+                return breedB.weight.split(' ')[0] - breedA.weight.split(' ')[0]
             })
         }
     }
