@@ -1,4 +1,4 @@
-import { DETAILS_BREED, GET_BREEDS, ERROR, GET_BREEDS_BY_NAME, GET_TEMPERAMENTS, FILTER_BREEDS, CREATE_BREED } from "./types"
+import { DETAILS_BREED, GET_BREEDS, ERROR, GET_BREEDS_BY_NAME, GET_TEMPERAMENTS, FILTER_BREEDS, CREATE_BREED, CLEAR_DETAIL_BREED } from "./types"
 import axios from 'axios'
 
 const HOST = "localhost";
@@ -67,5 +67,10 @@ export const createBreed = (data) => {
         } catch (error) {
             return dispatch({ type: ERROR, payload: error.message })
         }
+    }
+}
+export const clearBreed = () => {
+    return function (dispatch) {
+        return dispatch({ type: CLEAR_DETAIL_BREED, payload: {} })
     }
 }
