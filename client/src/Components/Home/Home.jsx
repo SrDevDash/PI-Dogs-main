@@ -76,10 +76,11 @@ export default function Home() {
     <div className={style.container}>
       <Navbar setCurrentPageNumber={setCurrentPageNumber} navigate={navigate} />
 
-      <button onClick={previous}>Previous</button>
-      <div>{currentPageNumber}</div>
-      <button onClick={nextPage}>NEXT</button>
-
+      <div className={style.pagination}>
+        <button onClick={previous}>Previous</button>
+        <h5>{currentPageNumber}</h5>
+        <button onClick={nextPage}>NEXT</button>
+      </div>
       <div className={style.dogsContainer}>
         {currentBreeds.map((breed, i) => {
           return (
@@ -90,7 +91,9 @@ export default function Home() {
             >
               <h3>{breed.name}</h3>
               <img src={breed.image} alt="" />
+              <h5>Weight</h5>
               <p>{breed.weight}KG</p>
+              <h5>Temperaments</h5>
               <p>{breed.temperament?.join(", ")}</p>
             </div>
           );
