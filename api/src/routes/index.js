@@ -103,7 +103,7 @@ router.post('/breed', async (req, res) => {
 
     const tempMap = temperamentToAdd.map(temp => temp.name)
 
-    res.status(200).send({ ...result.dataValues, temperament: tempMap });
+    res.status(200).send({ ...result.dataValues, temperament: tempMap, db: true });
 })
 
 router.get('/temperaments', async (req, res) => {
