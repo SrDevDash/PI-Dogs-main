@@ -5,6 +5,7 @@ import { useParams } from "react-router-dom";
 import { detailBreed } from "../../Redux/Actions/actions";
 import style from "./details.module.css";
 import Card from "./Card";
+import Loading from "../Loading/Loading";
 
 export default function Details() {
   const { id } = useParams();
@@ -18,6 +19,6 @@ export default function Details() {
   }, [dispatch, id]);
 
   return (
-    <div className={style.container}>{breed ? <Card /> : <p>Loading</p>}</div>
+    <div className={style.container}>{breed ? <Card /> : <Loading />}</div>
   );
 }
