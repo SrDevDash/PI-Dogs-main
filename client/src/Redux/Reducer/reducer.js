@@ -35,11 +35,13 @@ const rootReducer = (state = initialState, action) => {
             if (result.length)
                 return {
                     ...state,
-                    filterBreeds: result
+                    filterBreeds: result,
+                    errors: ''
                 }
 
             return {
                 ...state,
+                filterBreeds: [],
                 errors: result.error
             }
 
