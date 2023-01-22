@@ -5,11 +5,13 @@ export const filter = (filter, breedss) => {
 
 
     if (breeds) {
-        newBreeds = breedss.filter(breed => breeds === "Real Breeds" ? !breed.db : breed.db)
+        newBreeds = newBreeds.filter(breed => breeds === "Real Breeds" ? !breed.db : breed.db)
+        console.log('filter', newBreeds)
     }
 
     if (temperament) {
-        newBreeds = breedss.filter(breed => breed.temperament?.includes(temperament))
+        newBreeds = newBreeds.filter(breed => breed.temperament?.includes(temperament))
+        console.log('filter2', newBreeds)
     }
 
     if (weigth) {
@@ -38,5 +40,5 @@ export const filter = (filter, breedss) => {
     }
 
 
-    return newBreeds
+    return newBreeds.length ? newBreeds : { error: 'Breed Not Found' }
 }
