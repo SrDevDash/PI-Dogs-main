@@ -7,6 +7,7 @@ import { useEffect } from "react";
 import { useState } from "react";
 import Navbar from "./navbar/Navbar";
 import { useNavigate } from "react-router-dom";
+import Loading from "../Loading/Loading";
 
 // pag = 8
 
@@ -23,11 +24,35 @@ export default function Home() {
 
   const navigate = useNavigate();
 
-  const MAX_PAGES = Math.round(filterBreeds.length / 8);
+  const MAX_PAGES = Math.ceil(filterBreeds.length / 8);
 
-  useEffect(() => {
-    errors && alert(errors);
-  }, [errors]);
+  let pagButtons = [];
+
+  console.log(filterBreeds);
+
+  const changePageButtonHandler = (e) => {
+    if (currentPageNumber !== parseInt(e.target.name)) {
+      setCurrentBreeds([]);
+      setCurrentPageNumber(parseInt(e.target.name));
+    }
+  };
+
+  for (let i = 1; i <= MAX_PAGES; i++) {
+    pagButtons.push(
+      <button
+        key={i}
+        className={
+          currentPageNumber + "" === i + ""
+            ? style.currentPage
+            : style.otherPage
+        }
+        name={i}
+        onClick={changePageButtonHandler}
+      >
+        {i}
+      </button>
+    );
+  }
 
   useEffect(() => {
     filterBreeds.length && setCurrentBreeds(filterBreeds);
@@ -43,7 +68,6 @@ export default function Home() {
   }, [dispatch, breeds]);
 
   useEffect(() => {
-    console.log("clear");
     dispatch(clearBreed());
   }, [dispatch]);
 
@@ -61,13 +85,15 @@ export default function Home() {
   }, [currentPageNumber, filterBreeds]);
 
   const nextPage = (e) => {
-    if (!(MAX_PAGES < currentPageNumber + 1)) {
+    if (MAX_PAGES > currentPageNumber + 1) {
+      setCurrentBreeds([]);
       setCurrentPageNumber(currentPageNumber + 1);
     }
   };
 
   const previous = (e) => {
     if (!(currentPageNumber - 1 < 1)) {
+      setCurrentBreeds([]);
       setCurrentPageNumber(currentPageNumber - 1);
     }
   };
@@ -75,29 +101,39 @@ export default function Home() {
   return (
     <div className={style.container}>
       <Navbar setCurrentPageNumber={setCurrentPageNumber} navigate={navigate} />
+      {currentBreeds.length ? (
+        <div className={style.pagination}>
+          <button onClick={previous}>Previous</button>
+          {pagButtons.map((pagbutton) => pagbutton)}
 
-      <div className={style.pagination}>
-        <button onClick={previous}>Previous</button>
-        <h5>{currentPageNumber}</h5>
-        <button onClick={nextPage}>NEXT</button>
-      </div>
+          <button onClick={nextPage}>NEXT</button>
+        </div>
+      ) : (
+        ""
+      )}
       <div className={style.dogsContainer}>
-        {currentBreeds.map((breed, i) => {
-          return (
-            <div
-              key={i}
-              className={style.dogBox}
-              onClick={() => navigate(`/breed/${breed.id}`)}
-            >
-              <h3>{breed.name}</h3>
-              <img src={breed.image} alt="" />
-              <h5>Weight</h5>
-              <p>{breed.weight}KG</p>
-              <h5>Temperaments</h5>
-              <p>{breed.temperament?.join(", ")}</p>
-            </div>
-          );
-        })}
+        {errors ? (
+          <p>{errors}</p>
+        ) : currentBreeds.length ? (
+          currentBreeds.map((breed, i) => {
+            return (
+              <div
+                key={i}
+                className={style.dogBox}
+                onClick={() => navigate(`/breed/${breed.id}`)}
+              >
+                <h3>{breed.name}</h3>
+                <img src={breed.image} alt="" />
+                <h5>Weight</h5>
+                <p>{breed.weight}KG</p>
+                <h5>Temperaments</h5>
+                <p>{breed.temperament?.join(", ")}</p>
+              </div>
+            );
+          })
+        ) : (
+          <Loading />
+        )}
       </div>
     </div>
   );
