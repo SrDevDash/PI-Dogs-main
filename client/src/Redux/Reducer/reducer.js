@@ -32,10 +32,17 @@ const rootReducer = (state = initialState, action) => {
 
         case FILTER_BREEDS:
             const result = filter(action.payload, [...state.allBreeds]);
+            if (result.length)
+                return {
+                    ...state,
+                    filterBreeds: result,
+                    errors: ''
+                }
 
             return {
                 ...state,
-                filterBreeds: result
+                filterBreeds: [],
+                errors: result.error
             }
 
 
