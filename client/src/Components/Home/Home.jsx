@@ -28,8 +28,6 @@ export default function Home() {
 
   let pagButtons = [];
 
-  console.log(filterBreeds);
-
   const changePageButtonHandler = (e) => {
     if (currentPageNumber !== parseInt(e.target.name)) {
       setCurrentBreeds([]);

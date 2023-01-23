@@ -15,12 +15,25 @@ export default function Card() {
         <div>
           <h2 className="card-title">{name}</h2>
         </div>
-        <p>ID: {id}</p>
-        <p>Weight: {weight}</p>
-        <p>Height: {height}</p>
-        <p>Life Span: {life_span}</p>
-        <p>Temperament</p>
-        <p>{temperament?.join(", ")}</p>
+        <div className="cardSubInfo">
+          <p>
+            <strong>ID: </strong> {id}
+          </p>
+          <p>
+            <strong>Weight: </strong> {weight}
+          </p>
+          <p>
+            <strong>Height: </strong> {height}
+          </p>
+          <p>
+            {" "}
+            <strong>Life Span: </strong> {life_span}
+          </p>
+          <p>
+            <strong>Temperament</strong>
+          </p>
+          <p>{temperament?.join(", ")}</p>
+        </div>
       </div>
     </div>
   );
