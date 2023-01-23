@@ -83,7 +83,7 @@ export default function Home() {
   }, [currentPageNumber, filterBreeds]);
 
   const nextPage = (e) => {
-    if (MAX_PAGES > currentPageNumber + 1) {
+    if (MAX_PAGES >= currentPageNumber + 1) {
       setCurrentBreeds([]);
       setCurrentPageNumber(currentPageNumber + 1);
     }
