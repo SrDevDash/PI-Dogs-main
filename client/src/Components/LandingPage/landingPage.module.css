@@ -1,19 +1,55 @@
 .container {
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   flex-direction: column;
 
   height: 100vh;
-  width: 100%;
+  width: 100vw;
 
-  background-image: url("../../Img/BGLandingPG.jpg");
-  background-size: auto;
+  background-image: url("../../Img/LandingBG.jpg");
 
-  z-index: 100;
+  background-repeat: no-repeat;
+  background-size: 100vw 100vh;
+  background-position: center;
 }
 
 .container > h1 {
+  margin-top: 180px;
   color: white;
+  font-size: 100px;
   margin-bottom: 100px;
+  text-shadow: 2px 3px 10px black;
+
+  animation-name: init;
+  animation-duration: 1s;
+  animation-timing-function: ease-in-out;
+}
+
+.container > button {
+  height: 50px;
+  width: 180px;
+  font-size: 30px;
+
+  text-shadow: 1px 1px rgb(234, 237, 143);
+  color: rgb(92, 92, 224);
+  background-color: rgb(173, 173, 216);
+
+  animation-name: init;
+  animation-duration: 1s;
+  animation-timing-function: ease-in-out;
+}
+
+.container > button:hover {
+  color: rgb(71, 47, 157);
+  background-color: rgb(109, 144, 248);
+}
+
+@keyframes init {
+  0% {
+    transform: translateX(-1000px);
+  }
+  100% {
+    transform: translateX(0px);
+  }
 }

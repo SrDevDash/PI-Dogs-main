@@ -11,8 +11,8 @@ export default function LandingPage() {
 
   return (
     <div className={style.container}>
-      <h1>Dog Wiki</h1>
-      <button onClick={handleClick}>Enter</button>
+      <h1>DOG WIKI</h1>
+      <button onClick={handleClick}>GO IN</button>
     </div>
   );
 }
