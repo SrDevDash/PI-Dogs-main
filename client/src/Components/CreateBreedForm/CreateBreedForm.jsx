@@ -5,10 +5,13 @@ import "./createBreedForm.module.css";
 import { createBreed } from "../../Redux/Actions/actions";
 import style from "./createBreedForm.module.css";
 
+import { validator } from "./FormValidator";
+
 export default function CreateBreedForm() {
   // Crear estado para guardar toda la información del formulario
   const navigate = useNavigate();
   const dispatch = useDispatch();
+
   const [formData, setFormData] = useState({
     name: "",
     minWeight: "",
@@ -22,6 +25,9 @@ export default function CreateBreedForm() {
     temperaments: [],
   });
 
+  const [errors, setErrors] = useState({});
+
+  const canSubmit = Object.entries(errors).length === 0;
   const temperaments = useSelector((state) => state.temperaments);
 
   // Manejador de eventos para actualizar el estado cuando el usuario ingresa información
@@ -29,6 +35,7 @@ export default function CreateBreedForm() {
     const { name, value } = event.target;
 
     setFormData({ ...formData, [name]: value });
+    setErrors(validator({ ...formData, [name]: value }));
   };
 
   const handleTemp = (e) => {
@@ -59,25 +66,26 @@ export default function CreateBreedForm() {
 
     dispatch(createBreed(mapData));
   };
-
+  // <button onClick={() => navigate("/home")}>HOME</button>;
   return (
     <div className={style.container}>
-      <button onClick={() => navigate("/home")}>HOME</button>
       <form onSubmit={handleSubmit} className={style.form}>
+        <h1>Create Breed</h1>
         <div className={style.cardinfo}>
           <div className={style.col}>
-            <label>Name: </label>
             <input
+              style={errors.name && { border: "2px solid red" }}
               type="text"
               name="name"
               placeholder="NAME"
               value={formData.name}
               onChange={handleChange}
             />
+            {errors.name && <span className={style.error}>{errors.name}</span>}
           </div>
           <p className={style.col}>
-            <label>Weight: </label>
             <input
+              style={errors.weight && { border: "2px solid red" }}
               type="text"
               name="minWeight"
               placeholder="MIN WEIGHT"
@@ -85,33 +93,41 @@ export default function CreateBreedForm() {
               onChange={handleChange}
             />
             <input
+              style={errors.weight && { border: "2px solid red" }}
               type="text"
               name="maxWeight"
               placeholder="MAX WEIGHT"
               value={formData.maxWeight}
               onChange={handleChange}
             />
+            {errors.weight && (
+              <span className={style.error}>{errors.weight}</span>
+            )}
           </p>
           <p className={style.col}>
-            <label>Height: </label>
             <input
               type="text"
+              style={errors.height && { border: "2px solid red" }}
               name="minHeight"
               placeholder="MIN HEIGHT"
               value={formData.minheight}
               onChange={handleChange}
             />
             <input
+              style={errors.height && { border: "2px solid red" }}
               type="text"
               name="maxHeight"
               placeholder="MAX HEIGHT"
               value={formData.maxheight}
               onChange={handleChange}
             />
+            {errors.height && (
+              <span className={style.error}>{errors.height}</span>
+            )}
           </p>
           <p className={style.col}>
-            <label>Life Span: </label>
             <input
+              style={errors.lifeSpan && { border: "2px solid red" }}
               type="number"
               name="minLifeSpan"
               placeholder="MIN LIFE SPAN"
@@ -119,25 +135,32 @@ export default function CreateBreedForm() {
               onChange={handleChange}
             />
             <input
+              style={errors.lifeSpan && { border: "2px solid red" }}
               type="number"
               name="maxLifeSpan"
               placeholder="MAX LIFE SPAN"
               value={formData.maxLifeSpan}
               onChange={handleChange}
             />
+            {errors.lifeSpan && (
+              <span className={style.error}>{errors.lifeSpan}</span>
+            )}
           </p>
           <div className={style.col}>
-            <label>Image: </label>
             <input
+              style={errors.image && { border: "2px solid red" }}
               type="text"
               name="image"
               placeholder="IMAGE URL"
               value={formData.image}
               onChange={handleChange}
             />
+            {errors.image && (
+              <span className={style.error}>{errors.image}</span>
+            )}
           </div>
-          <div>
-            <div>
+          <div className={style.col}>
+            <div className={style.tempContainer}>
               {formData.temperaments.map((temp, i) => {
                 return (
                   <div key={i}>
@@ -146,6 +169,8 @@ export default function CreateBreedForm() {
                 );
               })}
             </div>
+          </div>
+          <div className={style.col}>
             <label>Temperament: </label>
             <select name="temperaments" onChange={handleTemp}>
               {temperaments.map((temperament, index) => (
@@ -155,8 +180,10 @@ export default function CreateBreedForm() {
               ))}
             </select>
           </div>
-          <button type="submit">Submit</button>
         </div>
+        <button style={{ marginTop: 20 }} disabled={canSubmit} type="submit">
+          Submit
+        </button>
       </form>
     </div>
   );
