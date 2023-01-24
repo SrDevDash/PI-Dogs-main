@@ -28,8 +28,6 @@ export default function Home() {
 
   let pagButtons = [];
 
-  console.log(filterBreeds);
-
   const changePageButtonHandler = (e) => {
     if (currentPageNumber !== parseInt(e.target.name)) {
       setCurrentBreeds([]);
@@ -85,7 +83,7 @@ export default function Home() {
   }, [currentPageNumber, filterBreeds]);
 
   const nextPage = (e) => {
-    if (MAX_PAGES > currentPageNumber + 1) {
+    if (MAX_PAGES >= currentPageNumber + 1) {
       setCurrentBreeds([]);
       setCurrentPageNumber(currentPageNumber + 1);
     }
@@ -125,9 +123,13 @@ export default function Home() {
                 <h3>{breed.name}</h3>
                 <img src={breed.image} alt="" />
                 <h5>Weight</h5>
-                <p>{breed.weight}KG</p>
+                <p className={style.weight}>
+                  {breed.weight} <strong>KG</strong>
+                </p>
                 <h5>Temperaments</h5>
-                <p>{breed.temperament?.join(", ")}</p>
+                <p className={style.temperaments}>
+                  {breed.temperament?.join(", ")}
+                </p>
               </div>
             );
           })

@@ -12,7 +12,10 @@
 }
 .loadingContainer > p {
   position: absolute;
-  color: white;
+  color: rgb(0, 0, 0);
 
   font-size: 30px;
+  font-weight: bold;
+
+  bottom: 50px;
 }

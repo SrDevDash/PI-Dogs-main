@@ -3,23 +3,31 @@
   justify-content: center;
   align-items: center;
 
-  background-color: #f5e1da;
+  background-color: #97e8ff82;
+  backdrop-filter: blur(10px);
+  box-shadow: rgba(17, 12, 46, 0.15) 0px 48px 100px 0px;
+
   border: 1px solid #f7786b;
   padding: 20px;
   width: 80vw;
   height: 80vh;
-  border-radius: 10px;
   box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1);
   overflow: hidden;
   font-family: "Open Sans", sans-serif;
+
+  border: 5px ridge rgba(50, 50, 220, 0.6);
 }
 
 .card-title {
   color: #000000;
   font-size: 24px;
   font-weight: bold;
-  margin-bottom: 10px;
+  margin: none;
   text-align: center;
+
+  color: #003785;
+
+  font-family: "Bakbak One", cursive;
 }
 
 .card-image {
@@ -50,5 +58,25 @@
   display: flex;
   justify-content: flex-start;
 
-  margin-bottom: 2.5em;
+  margin-bottom: 1em;
+}
+
+.cardSubInfo {
+  display: flex;
+  justify-content: flex-start;
+
+  flex-direction: column;
+  width: 100%;
+  height: auto;
+}
+
+.cardSubInfo > p > strong {
+  color: #003785;
+
+  font-family: "Bakbak One", cursive;
+  font-weight: lighter;
+}
+
+.cardSubInfo > p {
+  font-family: Helvetica, Helvetica, sans-serif;
 }

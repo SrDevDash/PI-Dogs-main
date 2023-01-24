@@ -35,6 +35,8 @@
   height: 500px;
   margin: 20px;
 
+  border: 5px ridge rgba(50, 50, 220, 0.6);
+
   background-color: #97e8ff82;
   backdrop-filter: blur(10px);
   box-shadow: rgba(17, 12, 46, 0.15) 0px 48px 100px 0px;
@@ -54,10 +56,20 @@
   overflow: hidden;
 }
 
-.dogBox > p {
-  width: 100%;
-  height: 40px;
+.weight {
+  width: 90%;
+  height: auto;
 
+  overflow: hidden;
+  font-family: "Bakbak One", cursive;
+  font-size: 17px;
+  color: rgb(57, 57, 57);
+}
+
+.temperaments {
+  width: 90%;
+  height: 70px;
+  font-family: "Bakbak One", cursive;
   overflow: hidden;
 }
 
