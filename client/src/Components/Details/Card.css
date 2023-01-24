@@ -31,8 +31,8 @@
 }
 
 .card-image {
-  width: 50%;
-  height: 70%;
+  width: 50vw;
+  height: 60vh;
   object-fit: contain;
   border-radius: 10px 10px 0 0;
 }

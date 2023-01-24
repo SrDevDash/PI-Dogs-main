@@ -45,6 +45,12 @@ export default function CreateBreedForm() {
       ...formData,
       [name]: [...new Set([...formData.temperaments, value])],
     });
+    setErrors(
+      validator({
+        ...formData,
+        [name]: [...new Set([...formData.temperaments, value])],
+      })
+    );
   };
 
   // Manejador de eventos para enviar la información del formulario al servidor
@@ -81,8 +87,8 @@ export default function CreateBreedForm() {
               value={formData.name}
               onChange={handleChange}
             />
-            {errors.name && <span className={style.error}>{errors.name}</span>}
           </div>
+          {errors.name && <span className={style.error}>{errors.name}</span>}
           <p className={style.col}>
             <input
               style={errors.weight && { border: "2px solid red" }}
@@ -100,10 +106,10 @@ export default function CreateBreedForm() {
               value={formData.maxWeight}
               onChange={handleChange}
             />
-            {errors.weight && (
-              <span className={style.error}>{errors.weight}</span>
-            )}
           </p>
+          {errors.weight && (
+            <span className={style.error}>{errors.weight}</span>
+          )}
           <p className={style.col}>
             <input
               type="text"
@@ -121,10 +127,10 @@ export default function CreateBreedForm() {
               value={formData.maxheight}
               onChange={handleChange}
             />
-            {errors.height && (
-              <span className={style.error}>{errors.height}</span>
-            )}
           </p>
+          {errors.height && (
+            <span className={style.error}>{errors.height}</span>
+          )}
           <p className={style.col}>
             <input
               style={errors.lifeSpan && { border: "2px solid red" }}
@@ -142,10 +148,10 @@ export default function CreateBreedForm() {
               value={formData.maxLifeSpan}
               onChange={handleChange}
             />
-            {errors.lifeSpan && (
-              <span className={style.error}>{errors.lifeSpan}</span>
-            )}
           </p>
+          {errors.lifeSpan && (
+            <span className={style.error}>{errors.lifeSpan}</span>
+          )}
           <div className={style.col}>
             <input
               style={errors.image && { border: "2px solid red" }}
@@ -155,10 +161,8 @@ export default function CreateBreedForm() {
               value={formData.image}
               onChange={handleChange}
             />
-            {errors.image && (
-              <span className={style.error}>{errors.image}</span>
-            )}
           </div>
+          {errors.image && <span className={style.error}>{errors.image}</span>}
           <div className={style.col}>
             <div className={style.tempContainer}>
               {formData.temperaments.map((temp, i) => {
@@ -181,6 +185,9 @@ export default function CreateBreedForm() {
             </select>
           </div>
         </div>
+        {errors.temperaments && (
+          <span className={style.error}>{errors.temperaments}</span>
+        )}
         <button style={{ marginTop: 20 }} disabled={canSubmit} type="submit">
           Submit
         </button>

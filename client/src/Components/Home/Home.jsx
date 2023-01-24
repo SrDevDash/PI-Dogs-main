@@ -8,6 +8,7 @@ import { useState } from "react";
 import Navbar from "./navbar/Navbar";
 import { useNavigate } from "react-router-dom";
 import Loading from "../Loading/Loading";
+import Breed404 from "../404/Breed404";
 
 // pag = 8
 
@@ -111,7 +112,7 @@ export default function Home() {
       )}
       <div className={style.dogsContainer}>
         {errors ? (
-          <p>{errors}</p>
+          <Breed404 />
         ) : currentBreeds.length ? (
           currentBreeds.map((breed, i) => {
             return (
