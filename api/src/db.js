@@ -3,7 +3,7 @@ const { Sequelize } = require('sequelize');
 const fs = require('fs');
 const path = require('path');
 const {
-  PGUSER, PGHOST, PGPASSWORD, PGDATABASE
+  PGUSER, PGHOST, PGPASSWORD, PGDATABASE, PGPORT
 } = process.env;
 
 const sequelize = new Sequelize(`postgresql://${{ PGUSER }}:${{ PGPASSWORD }}@${{ PGHOST }}:${{ PGPORT }}/${{ PGDATABASE }}`, {
