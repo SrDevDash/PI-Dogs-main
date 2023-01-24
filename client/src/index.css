@@ -31,12 +31,13 @@ button {
   width: auto;
   height: 30px;
 
-  background-color: #2e2e2e;
+  background-color: #646464;
   color: #ffffff;
 
   font-family: "Bakbak One", cursive;
   font-weight: 100;
   cursor: pointer;
+  border-radius: 20px;
 }
 
 button:hover {

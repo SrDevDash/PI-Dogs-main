@@ -6,8 +6,7 @@ export const validator = (data) => {
     if (!data.maxHeight) erros.height = 'Height is required'
     if (!data.minLifeSpan) erros.lifeSpan = 'Life span is required'
     if (!data.image) erros.image = 'Image is required'
-    if (!data.temperaments.lenght) erros.temperaments = 'One temperament at least is required'
-
+    if (!data.temperaments.length) erros.temperaments = 'One temperament at least is required'
 
     return erros
 }

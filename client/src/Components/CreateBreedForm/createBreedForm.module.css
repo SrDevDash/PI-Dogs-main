@@ -5,6 +5,7 @@
   flex-direction: column;
 
   min-height: 100vh;
+  padding: 30px 0;
   min-width: 100vw;
 
   background-image: url("../../Img/BGIMG.jpg");
@@ -30,7 +31,7 @@
   flex-direction: column;
 
   width: 50%;
-  height: 80vh;
+  height: auto;
 
   padding: 30px;
   background-color: #97e8ff82;
@@ -84,10 +85,16 @@
 }
 
 .error {
-  left: -300px;
-
   font-weight: bold;
-  background-color: black;
-  position: absolute;
   color: red;
+}
+
+.col > label {
+  font-weight: bold;
+  color: rgb(85, 85, 206);
+}
+
+.form > h1 {
+  font-weight: bold;
+  color: rgb(58, 58, 210);
 }
