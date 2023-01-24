@@ -20,10 +20,10 @@ export default function Card() {
             <strong>ID: </strong> {id}
           </p>
           <p>
-            <strong>Weight: </strong> {weight}
+            <strong>Weight: </strong> {weight} <strong>KG </strong>
           </p>
           <p>
-            <strong>Height: </strong> {height}
+            <strong>Height: </strong> {height} <strong>CM </strong>
           </p>
           <p>
             {" "}
