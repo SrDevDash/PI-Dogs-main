@@ -106,13 +106,16 @@
   top: 20px;
   left: 50px;
 
-  font-size: 30px;
+  font-size: 25px;
   height: auto;
 
   border-radius: 3px;
-
-  background-color: rgb(133, 166, 224);
+  padding: 0 10px;
+  background-color: #99a6d3;
   color: rgb(58, 58, 210);
+  border: none;
+
+  box-shadow: 2px 2px 7px black;
 }
 
 .gohome:hover {
@@ -179,11 +182,16 @@
 }
 
 .buttonSubmit {
-  font-size: 30px;
+  font-size: 25px;
   height: auto;
 
   border-radius: 3px;
   padding: 0 10px;
+  background-color: #99a6d3;
+  color: rgb(58, 58, 210);
+  border: none;
+
+  box-shadow: 2px 2px 7px black;
 }
 
 .animation {

@@ -84,8 +84,8 @@
 }
 
 .currentPage {
-  background-color: #97e8ff82;
-  color: #3752be;
+  background-color: #99a6d3;
+  color: #2e5fefc7;
   font-weight: bold;
   width: 30px;
   height: 30px;
@@ -102,5 +102,6 @@
   backdrop-filter: blur(10px);
   border-radius: 4px;
   margin: 0px 5px;
+  color: #ffffff;
   background-color: #2e5fefc7;
 }
