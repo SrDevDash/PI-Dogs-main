@@ -90,7 +90,9 @@ export default function CreateBreedForm() {
           {[formData].map((breed, i) => {
             return (
               <>
-                <h1 className={style.preview}>Preview</h1>
+                <h1 key={2} className={style.preview}>
+                  Preview
+                </h1>
                 <div
                   key={i}
                   className={`${style.dogBox} ${
