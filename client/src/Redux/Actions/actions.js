@@ -1,14 +1,13 @@
 import { DETAILS_BREED, GET_BREEDS, ERROR, GET_BREEDS_BY_NAME, GET_TEMPERAMENTS, FILTER_BREEDS, CREATE_BREED, CLEAR_DETAIL_BREED } from "./types"
 import axios from 'axios'
 
-const HOST = "localhost";
-const PORT = "3001";
 
+const { HOST } = process.env;
 
 export const getBreeds = () => {
     return async function (dispatch) {
         try {
-            let breeds = await axios(`http://${HOST}:${PORT}/dogs`)
+            let breeds = await axios(`http://${HOST}/dogs`)
             console.log(breeds.data);
             return dispatch({ type: GET_BREEDS, payload: breeds.data })
         } catch (error) {
@@ -20,7 +19,7 @@ export const getBreeds = () => {
 export const getBreedsByName = (name) => {
     return async function (dispatch) {
         try {
-            let breeds = await axios(`http://${HOST}:${PORT}/dogs?name=${name}`)
+            let breeds = await axios(`http://${HOST}dogs?name=${name}`)
             if (!breeds.data?.msg) return dispatch({ type: GET_BREEDS_BY_NAME, payload: breeds.data })
             return dispatch({ type: ERROR, payload: breeds.data.msg })
         } catch (error) {
@@ -32,7 +31,7 @@ export const getBreedsByName = (name) => {
 export const getTemperament = () => {
     return async function (dispatch) {
         try {
-            let temperaments = await axios(`http://${HOST}:${PORT}/temperaments`)
+            let temperaments = await axios(`http://${HOST}/temperaments`)
             return dispatch({ type: GET_TEMPERAMENTS, payload: temperaments.data.data })
         } catch (error) {
             return dispatch({ type: ERROR, payload: error })
@@ -49,7 +48,7 @@ export const filterBreeds = (filter) => {
 export const detailBreed = (id) => {
     return async function (dispatch) {
         try {
-            let breed = await axios(`http://localhost:3001/breeds/${id}`);
+            let breed = await axios(`http://${HOST}/breeds/${id}`);
 
             return dispatch({ type: DETAILS_BREED, payload: breed.data })
         } catch (error) {
@@ -61,7 +60,7 @@ export const detailBreed = (id) => {
 export const createBreed = (data) => {
     return async function (dispatch) {
         try {
-            let breed = await axios.post(`http://localhost:3001/breed`, data);
+            let breed = await axios.post(`http://${HOST}/breed`, data);
 
             return dispatch({ type: CREATE_BREED, payload: breed.data })
         } catch (error) {
