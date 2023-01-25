@@ -80,3 +80,9 @@
 .cardSubInfo > p {
   font-family: Helvetica, Helvetica, sans-serif;
 }
+
+.goHome {
+  position: absolute;
+  top: 20px;
+  left: 50px;
+}
