@@ -97,6 +97,7 @@
 
 .form > h1 {
   font-weight: bold;
+  text-shadow: 2px 1px 3px black;
   color: rgb(58, 58, 210);
 }
 
@@ -104,4 +105,96 @@
   position: absolute;
   top: 20px;
   left: 50px;
+
+  font-size: 30px;
+  height: auto;
+
+  border-radius: 3px;
+
+  background-color: rgb(133, 166, 224);
+  color: rgb(58, 58, 210);
+}
+
+.gohome:hover {
+  background-color: rgb(142, 228, 236);
+}
+
+.dogBox {
+  position: absolute;
+  left: -300px;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  flex-direction: column;
+
+  width: 250px;
+  height: 500px;
+  margin: 20px;
+
+  border: 5px ridge rgba(50, 50, 220, 0.6);
+
+  background-color: #97e8ff82;
+  backdrop-filter: blur(10px);
+  box-shadow: rgba(17, 12, 46, 0.15) 0px 48px 100px 0px;
+}
+
+.dogBox > img {
+  min-width: 200px;
+  min-height: 200px;
+  max-width: 200px;
+  max-height: 200px;
+}
+
+.dogBox > h3 {
+  width: 100%;
+  height: 20px;
+
+  overflow: hidden;
+}
+
+.weight {
+  width: 90%;
+  height: auto;
+
+  overflow: hidden;
+  font-family: "Bakbak One", cursive;
+  font-size: 17px;
+  color: rgb(57, 57, 57);
+}
+
+.temperaments {
+  width: 90%;
+  height: 70px;
+  font-family: "Bakbak One", cursive;
+  overflow: hidden;
+}
+
+.preview {
+  position: absolute;
+  color: rgb(80, 80, 196);
+
+  text-shadow: 2px 2px 5px black;
+  left: -200px;
+  top: 0;
+}
+
+.buttonSubmit {
+  font-size: 30px;
+  height: auto;
+
+  border-radius: 3px;
+  padding: 0 10px;
+}
+
+.animation {
+  animation: send 2s ease-in-out forwards;
+}
+
+@keyframes send {
+  0% {
+    transform: translateY(0px);
+  }
+  100% {
+    transform: translateY(-1000px);
+  }
 }

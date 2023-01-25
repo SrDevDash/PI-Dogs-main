@@ -31,7 +31,7 @@ button {
   width: auto;
   height: 30px;
 
-  background-color: #646464;
+  background-color: hwb(0 44% 56%);
   color: #ffffff;
 
   font-family: "Bakbak One", cursive;
