@@ -6,12 +6,10 @@ export const filter = (filter, breedss) => {
 
     if (breeds) {
         newBreeds = newBreeds.filter(breed => breeds === "Real Breeds" ? !breed.db : breed.db)
-        console.log('filter', newBreeds)
     }
 
     if (temperament) {
         newBreeds = newBreeds.filter(breed => breed.temperament?.includes(temperament))
-        console.log('filter2', newBreeds)
     }
 
     if (weigth) {
