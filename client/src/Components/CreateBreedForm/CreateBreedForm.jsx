@@ -72,11 +72,18 @@ export default function CreateBreedForm() {
 
     dispatch(createBreed(mapData));
   };
+
+  const handlerGoHome = (e) => {
+    navigate("/home");
+  };
   // <button onClick={() => navigate("/home")}>HOME</button>;
   return (
     <div className={style.container}>
       <form onSubmit={handleSubmit} className={style.form}>
         <h1>Create Breed</h1>
+        <button className={style.gohome} onClick={handlerGoHome} type="submit">
+          HOME
+        </button>
         <div className={style.cardinfo}>
           <div className={style.col}>
             <input
@@ -188,7 +195,7 @@ export default function CreateBreedForm() {
         {errors.temperaments && (
           <span className={style.error}>{errors.temperaments}</span>
         )}
-        <button style={{ marginTop: 20 }} disabled={canSubmit} type="submit">
+        <button style={{ marginTop: 20 }} disabled={!canSubmit} type="submit">
           Submit
         </button>
       </form>
