@@ -2,7 +2,9 @@ import { DETAILS_BREED, GET_BREEDS, ERROR, GET_BREEDS_BY_NAME, GET_TEMPERAMENTS,
 import axios from 'axios'
 
 
-const { HOST } = process.env;
+const { REACT_APP_HOST } = process.env;
+const HOST = REACT_APP_HOST;
+console.log(HOST);
 
 export const getBreeds = () => {
     return async function (dispatch) {
@@ -19,7 +21,7 @@ export const getBreeds = () => {
 export const getBreedsByName = (name) => {
     return async function (dispatch) {
         try {
-            let breeds = await axios(`http://${HOST}dogs?name=${name}`)
+            let breeds = await axios(`http://${HOST}/dogs?name=${name}`)
             if (!breeds.data?.msg) return dispatch({ type: GET_BREEDS_BY_NAME, payload: breeds.data })
             return dispatch({ type: ERROR, payload: breeds.data.msg })
         } catch (error) {

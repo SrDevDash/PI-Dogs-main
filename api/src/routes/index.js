@@ -31,7 +31,6 @@ router.get('/dogs', async (req, res) => {
         breedDB = breedDB.map(breed => { return { ...breed.dataValues, temperament: breed.dataValues.Temperaments.map(t => t.name), db: true, Temperaments: undefined } });
 
         const mapDogs = dogs.data.map(dog => {
-            if (dog.name === "Olde English Bulldogge") { console.log(transform(dog.weight)) }
             return { id: dog.id, name: dog.name, weight: transform(dog.weight), temperament: dog.temperament?.split(', '), image: dog.image.url }
         })
 
