@@ -12,6 +12,7 @@ export default function CreateBreedForm() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
+  const [animationTriger, setAnimationTriger] = useState(false);
   const [formData, setFormData] = useState({
     name: "",
     minWeight: "",
@@ -71,13 +72,47 @@ export default function CreateBreedForm() {
     };
 
     dispatch(createBreed(mapData));
+    setAnimationTriger(true);
+  };
+
+  const handlerGoHome = (e) => {
+    navigate("/home");
   };
   // <button onClick={() => navigate("/home")}>HOME</button>;
   return (
     <div className={style.container}>
       <form onSubmit={handleSubmit} className={style.form}>
         <h1>Create Breed</h1>
+        <button className={style.gohome} onClick={handlerGoHome} type="submit">
+          HOME
+        </button>
         <div className={style.cardinfo}>
+          {[formData].map((breed, i) => {
+            return (
+              <>
+                <h1 className={style.preview}>Preview</h1>
+                <div
+                  key={i}
+                  className={`${style.dogBox} ${
+                    animationTriger ? style.animation : null
+                  }`}
+                >
+                  <h3>{breed.name}</h3>
+                  <img src={breed.image} alt="" />
+                  <h5>Weight</h5>
+                  <p className={style.weight}>
+                    {`${breed.minWeight} - ${breed.maxWeight}`}{" "}
+                    <strong>KG</strong>
+                  </p>
+                  <h5>Temperaments</h5>
+                  <p className={style.temperaments}>
+                    {formData.temperaments?.join(", ")}
+                  </p>
+                </div>
+              </>
+            );
+          })}
+
           <div className={style.col}>
             <input
               style={errors.name && { border: "2px solid red" }}
@@ -188,7 +223,12 @@ export default function CreateBreedForm() {
         {errors.temperaments && (
           <span className={style.error}>{errors.temperaments}</span>
         )}
-        <button style={{ marginTop: 20 }} disabled={canSubmit} type="submit">
+        <button
+          className={style.buttonSubmit}
+          style={{ marginTop: 20 }}
+          disabled={!canSubmit}
+          type="submit"
+        >
           Submit
         </button>
       </form>
