@@ -40,8 +40,16 @@
   background-color: #97e8ff82;
   backdrop-filter: blur(10px);
   box-shadow: rgba(17, 12, 46, 0.15) 0px 48px 100px 0px;
+  cursor: pointer;
+  transition: 0.3s;
 }
 
+.dogBox:hover {
+  transition: 0.3s;
+  transform: scale(1.05);
+  filter: brightness(1.1);
+  box-shadow: 3px 3px 7px black;
+}
 .dogBox > img {
   min-width: 200px;
   min-height: 200px;
