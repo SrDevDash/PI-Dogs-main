@@ -63,7 +63,7 @@ router.get('/breeds/:id', async (req, res) => {
             }
         });
 
-        breedDB = breedDB.map(breed => { return { ...breed.dataValues, temperament: breed.dataValues.Temperaments.map(t => t.name), db: true, Temperaments: undefined } });
+        breedDB = breedDB.filter(dog => dog.id == id).map(breed => { return { ...breed.dataValues, temperament: breed.dataValues.Temperaments.map(t => t.name), db: true, Temperaments: undefined } });
 
         let result = breedsAPI.data.filter(dog => dog.id == id).map(dog => {
             return {
