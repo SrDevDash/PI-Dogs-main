@@ -25,7 +25,6 @@ export const filter = (filter, breedss) => {
     }
 
     if (alpha) {
-        console.log('ordern ALPHA')
         if (alpha === 'ASC') {
             newBreeds.sort((breedA, breedB) => {
                 return breedB.name.charCodeAt(0) - breedA.name.charCodeAt(0)

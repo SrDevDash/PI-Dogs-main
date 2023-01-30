@@ -78,6 +78,13 @@ export default function CreateBreedForm() {
   const handlerGoHome = (e) => {
     navigate("/home");
   };
+
+  const deleteTemp = (name) => {
+    setFormData({
+      ...formData,
+      temperaments: formData.temperaments.filter((data) => data !== name),
+    });
+  };
   // <button onClick={() => navigate("/home")}>HOME</button>;
   return (
     <div className={style.container}>
@@ -205,7 +212,13 @@ export default function CreateBreedForm() {
               {formData.temperaments.map((temp, i) => {
                 return (
                   <div key={i}>
-                    <p>{temp}</p>
+                    <p
+                      onClick={() => {
+                        deleteTemp(temp);
+                      }}
+                    >
+                      {temp}
+                    </p>
                   </div>
                 );
               })}
