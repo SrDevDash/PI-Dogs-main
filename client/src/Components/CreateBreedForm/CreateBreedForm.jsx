@@ -78,6 +78,13 @@ export default function CreateBreedForm() {
   const handlerGoHome = (e) => {
     navigate("/home");
   };
+
+  const deleteTemp = (name) => {
+    setFormData({
+      ...formData,
+      temperaments: formData.temperaments.filter((data) => data !== name),
+    });
+  };
   // <button onClick={() => navigate("/home")}>HOME</button>;
   return (
     <div className={style.container}>
@@ -87,34 +94,24 @@ export default function CreateBreedForm() {
           HOME
         </button>
         <div className={style.cardinfo}>
-          {[formData].map((breed, i) => {
-            return (
-              <>
-                <h1 key={2} className={style.preview}>
-                  Preview
-                </h1>
-                <div
-                  key={i}
-                  className={`${style.dogBox} ${
-                    animationTriger ? style.animation : null
-                  }`}
-                >
-                  <h3>{breed.name}</h3>
-                  <img src={breed.image} alt="" />
-                  <h5>Weight</h5>
-                  <p className={style.weight}>
-                    {`${breed.minWeight} - ${breed.maxWeight}`}{" "}
-                    <strong>KG</strong>
-                  </p>
-                  <h5>Temperaments</h5>
-                  <p className={style.temperaments}>
-                    {formData.temperaments?.join(", ")}
-                  </p>
-                </div>
-              </>
-            );
-          })}
-
+          <h1 className={style.preview}>Preview</h1>
+          <div
+            className={`${style.dogBox} ${
+              animationTriger ? style.animation : null
+            }`}
+          >
+            <h3>{formData.name}</h3>
+            <img src={formData.image} alt="" />
+            <h5>Weight</h5>
+            <p className={style.weight}>
+              {`${formData.minWeight} - ${formData.maxWeight}`}{" "}
+              <strong key={0}>KG</strong>
+            </p>
+            <h5>Temperaments</h5>
+            <p className={style.temperaments}>
+              {formData.temperaments?.join(", ")}
+            </p>
+          </div>
           <div className={style.col}>
             <input
               style={errors.name && { border: "2px solid red" }}
@@ -205,7 +202,13 @@ export default function CreateBreedForm() {
               {formData.temperaments.map((temp, i) => {
                 return (
                   <div key={i}>
-                    <p>{temp}</p>
+                    <p
+                      onClick={() => {
+                        deleteTemp(temp);
+                      }}
+                    >
+                      {temp}
+                    </p>
                   </div>
                 );
               })}
