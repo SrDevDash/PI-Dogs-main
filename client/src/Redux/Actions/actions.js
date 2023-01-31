@@ -9,7 +9,6 @@ export const getBreeds = () => {
     return async function (dispatch) {
         try {
             let breeds = await axios(`https://${HOST}/dogs`)
-            console.log(breeds.data);
             return dispatch({ type: GET_BREEDS, payload: breeds.data })
         } catch (error) {
             return dispatch({ type: ERROR, payload: error })
