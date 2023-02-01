@@ -27,11 +27,11 @@ export const filter = (filter, breedss) => {
     if (alpha) {
         if (alpha === 'ASC') {
             newBreeds.sort((breedA, breedB) => {
-                return breedB.name.charCodeAt(0) - breedA.name.charCodeAt(0)
+                return breedB.name.charCodeAt(0).toLowerCase() - breedA.name.charCodeAt(0).toLowerCase()
             })
         } else {
             newBreeds.sort((breedA, breedB) => {
-                return breedA.name.charCodeAt(0) - breedB.name.charCodeAt(0)
+                return breedA.name.charCodeAt(0).toLowerCase() - breedB.name.charCodeAt(0).toLowerCase()
             })
         }
     }
