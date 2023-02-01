@@ -18,6 +18,7 @@ export default function Navbar({ navigate, setCurrentPageNumber }) {
 
   const searchHandler = (e) => {
     dispatch(getBreedsByName(inputValue));
+    setCurrentPageNumber(1);
   };
 
   useEffect(() => {
