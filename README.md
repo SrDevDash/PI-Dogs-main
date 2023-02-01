@@ -4,6 +4,9 @@
 
 <img height="200" src="./dog.png" />
 
+![image](https://user-images.githubusercontent.com/62898809/216082786-dbec28af-a805-413b-b764-adfd6ed02e9d.png)
+
+
 ## Objetivos del Proyecto
 
 - Construir una App utlizando React, Redux, Node y Sequelize.
