@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import "./createBreedForm.module.css";
-import { createBreed } from "../../Redux/Actions/actions";
+import { createBreed, getTemperament } from "../../Redux/Actions/actions";
 import style from "./createBreedForm.module.css";
 
 import { validator } from "./FormValidator";
@@ -26,12 +26,16 @@ export default function CreateBreedForm() {
     temperaments: [],
   });
 
-  const [errors, setErrors] = useState({});
+  const [errors, setErrors] = useState({ a: "" });
 
   const canSubmit = Object.entries(errors).length === 0;
+
   const temperaments = useSelector((state) => state.temperaments);
 
   // Manejador de eventos para actualizar el estado cuando el usuario ingresa información
+
+  !temperaments.length && dispatch(getTemperament());
+
   const handleChange = (event) => {
     const { name, value } = event.target;
 
