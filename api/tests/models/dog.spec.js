@@ -1,22 +1,38 @@
 const { Breed, conn } = require('../../src/db.js');
+const {
+  sequelize,
+  dataTypes,
+  checkModelName,
+  checkPropertyExists
+} = require('sequelize-test-helpers');
 const { expect } = require('chai');
 
+const BreedModel = require('../../src/models/Breed.js');
+const TemperamentM = require('../../src/models/Temperament.js');
+
+
 describe('Breed model', () => {
-  before(() => conn.authenticate()
-    .catch((err) => {
-      console.error('Unable to connect to the database:', err);
-    }));
-  describe('Validators', () => {
-    beforeEach(() => Breed.sync({ force: true }));
-    describe('name', () => {
-      it('should throw an error if name is null', (done) => {
-        Breed.create({})
-          .then(() => done(new Error('It requires a valid name')))
-          .catch(() => done());
-      });
-      it('should work when its a valid name', () => {
-        Breed.create({ name: 'Pug' });
-      });
-    });
-  });
+
+  const Model = BreedModel(sequelize, dataTypes);
+
+  const instance = new Model();
+
+  checkModelName(Model)('Breed');
+
+  context('properties', () => {
+    ['name', 'image'].forEach(checkPropertyExists(instance))
+  })
+
 });
+
+// context('check associations', () => {
+//   const OtherModel = TemperamentM(sequelize, dataTypes) // it doesn't matter what
+//   const Model = BreedModel(sequelize, dataTypes);
+//   before(() => {
+//     Model.associate({ OtherModel })
+//   })
+
+//   it('defined a belongsTo association with OtherModel', () => {
+//     expect(Model.belongsToMany).to.have.been.calledWith(OtherModel)
+//   })
+// })
